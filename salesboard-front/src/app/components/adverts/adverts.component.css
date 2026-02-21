@@ -1,0 +1,348 @@
+/* Элитный минимализм для объявлений */
+.adverts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Шапка с градиентом */
+.adverts-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.adverts-header h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.search-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.search-input {
+  display: flex;
+  flex: 1;
+  min-width: 300px;
+  background: #f7fafc;
+  border: 1px solid #e9ecef;
+  border-radius: 100px;
+  padding: 4px;
+  transition: all 0.3s;
+}
+
+.search-input:focus-within {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+}
+
+.search-input input {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+  color: #2d3748;
+}
+
+.search-input input::placeholder {
+  color: #a0aec0;
+}
+
+.search-btn {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  transform: translateX(2px);
+  box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.3);
+}
+
+.all-categories-btn {
+  padding: 10px 24px;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+  transition: all 0.3s;
+}
+
+.all-categories-btn:hover {
+  border-color: #764ba2;
+  color: #764ba2;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Состояния */
+.loading-state {
+  text-align: center;
+  padding: 60px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #f0f0fa;
+  border-top: 3px solid #764ba2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  color: #718096;
+  font-size: 16px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px;
+  background: #f7fafc;
+  border-radius: 32px;
+  color: #718096;
+  font-size: 16px;
+}
+
+/* Сетка объявлений */
+.adverts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* Карточка объявления */
+.advert-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 24px;
+  padding: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.advert-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.advert-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 30px -12px rgba(102, 126, 234, 0.2);
+  border-color: transparent;
+}
+
+.advert-card:hover::before {
+  opacity: 1;
+}
+
+/* Заголовок и цена */
+.advert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.advert-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+  flex: 1;
+  padding-right: 16px;
+  line-height: 1.4;
+}
+
+.advert-price {
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+/* Описание */
+.advert-description {
+  color: #718096;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Детали */
+.advert-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 12px 0;
+  border-top: 1px solid #f0f0fa;
+  border-bottom: 1px solid #f0f0fa;
+  font-size: 13px;
+}
+
+.advert-location {
+  color: #4a5568;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.advert-location::before {
+  content: "📍";
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.advert-category {
+  color: #4a5568;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.advert-category::before {
+  content: "🏷️";
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Кнопки действий */
+.advert-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.contact-btn, .details-btn {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  border: none;
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  box-shadow: 0 8px 15px -3px rgba(72, 187, 120, 0.3);
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px -3px rgba(72, 187, 120, 0.4);
+}
+
+.details-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 8px 15px -3px rgba(102, 126, 234, 0.3);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px -3px rgba(102, 126, 234, 0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .adverts-header h2 {
+    font-size: 28px;
+  }
+  
+  .search-section {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .search-btn, .all-categories-btn {
+    width: 100%;
+  }
+  
+  .adverts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .adverts-container {
+    padding: 16px;
+  }
+  
+  .adverts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .advert-actions {
+    flex-direction: column;
+  }
+  
+  .advert-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .advert-title {
+    padding-right: 0;
+  }
+}

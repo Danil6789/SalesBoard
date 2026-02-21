@@ -1,0 +1,35 @@
+<div class="app">
+  <div class="header">
+    <div class="container">
+      <h1>Salesboard</h1>
+      
+      <div class="nav">
+        <a routerLink="/">Главная</a>
+        <a routerLink="/adverts">Объявления</a>
+        <a routerLink="/create-advert" *ngIf="isLoggedIn">Добавить</a>
+        <a routerLink="/profile" *ngIf="isLoggedIn">Профиль</a>
+      </div>
+      
+      <div class="auth">
+        <a routerLink="/login" *ngIf="!isLoggedIn" class="btn">Войти</a>
+        <a routerLink="/register" *ngIf="!isLoggedIn" class="btn btn-primary">Регистрация</a>
+        
+        <div *ngIf="isLoggedIn">
+          <span>Привет, {{username}}</span>
+          <button (click)="logout()" class="btn">Выйти</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <p>© 2026 Salesboard. Простой пет-проект</p>
+      <p>Контакты: support&#64;salesboard.ru</p>
+    </div>
+  </div>
+</div>

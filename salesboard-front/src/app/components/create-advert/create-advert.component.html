@@ -1,0 +1,179 @@
+<div class="create-advert-container">
+    <div class="create-advert-card">
+      <h2>Создать объявление</h2>
+      
+      <form (ngSubmit)="onSubmit()" #advertForm="ngForm">
+        <!-- Заголовок -->
+        <div class="form-group">
+          <label for="title">Название объявления <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="title" 
+            name="title"
+            [(ngModel)]="advert.title"
+            required
+            minlength="5"
+            maxlength="100"
+            #title="ngModel"
+            placeholder="Например: iPhone 13 Pro Max"
+            [class.invalid]="title.invalid && title.touched"
+          >
+          <div class="error-message" *ngIf="title.invalid && title.touched">
+            <span *ngIf="title.errors?.['required']">Название обязательно</span>
+            <span *ngIf="title.errors?.['minlength']">Минимум 5 символов</span>
+          </div>
+        </div>
+  
+        <!-- Категория и тип в одной строке -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category">Категория <span class="required">*</span></label>
+            <select 
+              id="category" 
+              name="categoryId"
+              [(ngModel)]="advert.categoryId"
+              required
+              #category="ngModel"
+              [class.invalid]="category.invalid && category.touched"
+            >
+              <option value="" disabled selected>Выберите категорию</option>
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+            <div class="error-message" *ngIf="category.invalid && category.touched">
+              Выберите категорию
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="type">Тип объявления <span class="required">*</span></label>
+            <select 
+              id="type" 
+              name="type"
+              [(ngModel)]="advert.type"
+              required
+              #type="ngModel"
+              [class.invalid]="type.invalid && type.touched"
+            >
+              <option value="" disabled selected>Выберите тип</option>
+              <option value="PRODUCT">Товар</option>
+              <option value="SERVICE">Услуга</option>
+            </select>
+            <div class="error-message" *ngIf="type.invalid && type.touched">
+              Выберите тип объявления
+            </div>
+          </div>
+        </div>
+  
+        <!-- Город и цена -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">Город <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="city" 
+              name="city"
+              [(ngModel)]="advert.city"
+              required
+              #city="ngModel"
+              placeholder="Например: Москва"
+              [class.invalid]="city.invalid && city.touched"
+            >
+            <div class="error-message" *ngIf="city.invalid && city.touched">
+              Укажите город
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="price">Цена <span class="required">*</span></label>
+            <div class="price-input">
+              <input 
+                type="number" 
+                id="price" 
+                name="price"
+                [(ngModel)]="advert.price"
+                required
+                min="0"
+                #price="ngModel"
+                placeholder="10000"
+                [class.invalid]="price.invalid && price.touched"
+              >
+              <span class="currency">₽</span>
+            </div>
+            <div class="error-message" *ngIf="price.invalid && price.touched">
+              <span *ngIf="price.errors?.['required']">Укажите цену</span>
+              <span *ngIf="price.errors?.['min']">Цена не может быть отрицательной</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Описание -->
+        <div class="form-group">
+          <label for="description">Описание <span class="required">*</span></label>
+          <textarea 
+            id="description" 
+            name="description"
+            [(ngModel)]="advert.description"
+            required
+            minlength="10"
+            maxlength="1000"
+            #description="ngModel"
+            rows="6"
+            placeholder="Опишите товар или услугу подробнее..."
+            [class.invalid]="description.invalid && description.touched"
+          ></textarea>
+          <div class="textarea-footer">
+            <div class="error-message" *ngIf="description.invalid && description.touched">
+              <span *ngIf="description.errors?.['required']">Описание обязательно</span>
+              <span *ngIf="description.errors?.['minlength']">Минимум 10 символов</span>
+            </div>
+            <div class="char-counter" [class.warning]="description.value?.length > 900">
+              {{ description.value?.length || 0 }}/1000
+            </div>
+          </div>
+        </div>
+  
+        <!-- Изображение -->
+        <div class="form-group">
+          <label for="image">Фотографии</label>
+          <div class="image-upload-area" (click)="fileInput.click()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <input 
+              type="file" 
+              #fileInput 
+              id="image" 
+              name="image"
+              accept="image/*"
+              multiple
+              (change)="onFileSelected($event)"
+              style="display: none"
+            >
+            <div class="upload-placeholder" *ngIf="!selectedFiles?.length">
+              <span class="upload-icon">📷</span>
+              <p>Нажмите или перетащите фото</p>
+              <span class="upload-hint">PNG, JPG до 10MB</span>
+            </div>
+            <div class="image-preview-container" *ngIf="selectedFiles.length > 0">
+              <div class="image-preview" *ngFor="let file of selectedFiles; let i = index">
+                <img [src]="file.preview" alt="Preview">
+                <button type="button" class="remove-image" (click)="removeImage(i)">×</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Кнопки действий -->
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" routerLink="/adverts">Отмена</button>
+          <button 
+            type="submit" 
+            class="submit-btn" 
+            [disabled]="advertForm.invalid || isSubmitting"
+          >
+            <span *ngIf="!isSubmitting">Опубликовать</span>
+            <span *ngIf="isSubmitting" class="spinner"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

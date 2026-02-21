@@ -1,0 +1,87 @@
+<!-- src/app/components/profile/profile.component.html -->
+<div class="profile-container">
+  <div *ngIf="user; else notLoggedIn">
+    <!-- Шапка профиля -->
+    <div class="profile-header">
+      <h2>Профиль пользователя</h2>
+      <button class="logout-btn" (click)="logout()">Выйти</button>
+    </div>
+
+    <!-- Информация о пользователе в стиле карточки -->
+    <div class="user-info-card">
+      <h3 class="info-title">Личная информация</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Имя пользователя:</span>
+          <span class="info-value">{{ user?.username }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email:</span>
+          <span class="info-value">{{ user?.email }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Зарегистрирован:</span>
+          <span class="info-value">{{ user?.createdAt | date:'dd.MM.yyyy' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Заголовок для объявлений -->
+    <div class="adverts-section-header">
+      <h3>Мои объявления</h3>
+    </div>
+
+    <!-- Состояния загрузки -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Загрузка объявлений...</p>
+    </div>
+
+    <!-- Нет объявлений -->
+    <div *ngIf="!isLoading && userAdverts.length === 0" class="no-results">
+      <p>У вас пока нет объявлений</p>
+      <a routerLink="/create-advert" class="create-btn">Создать первое объявление</a>
+    </div>
+
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div class="adverts-grid" *ngIf="!isLoading && userAdverts.length > 0">
+      <div class="advert-card" *ngFor="let advert of userAdverts">
+        <div class="advert-header">
+          <h4 class="advert-title">{{ advert.title }}</h4>
+          <span class="advert-price">{{ advert.price | currency:'RUB':'symbol':'1.0-0' }}</span>
+        </div>
+        
+        <p class="advert-description">{{ advert.description }}</p>
+        
+        <div class="advert-details">
+          <span class="advert-location">{{ advert.city }}</span>
+          <span class="advert-category">{{ getCategoryName(advert.categoryId) }}</span>
+          <span class="advert-status-badge" [class]="{
+            'status-active': advert.status === 'ACTIVE',
+            'status-inactive': advert.status === 'INACTIVE',
+            'status-pending': advert.status === 'PENDING'
+          }">
+            {{ getStatusText(advert.status) }}
+          </span>
+        </div>
+        
+        <div class="advert-actions">
+          <button class="edit-btn" [routerLink]="['/edit-advert', advert.id]">Редактировать</button>
+          <button class="details-btn" [routerLink]="['/adverts', advert.id]">Подробнее</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #notLoggedIn>
+    <div class="not-logged-in">
+      <h4>Доступ запрещен</h4>
+      <p>Для просмотра профиля необходимо <a routerLink="/login">войти в систему</a>.</p>
+      <p>Нет аккаунта? <a routerLink="/register">Зарегистрируйтесь</a></p>
+    </div>
+  </ng-template>
+</div>

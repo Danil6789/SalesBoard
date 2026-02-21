@@ -1,0 +1,172 @@
+.login-page {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 48px 40px;
+  border-radius: 32px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.login-form:hover {
+  transform: translateY(-4px);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 32px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  font-size: 15px;
+  transition: all 0.3s;
+  background: #f8fafc;
+  color: #2d3748;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #764ba2;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #a0aec0;
+  font-size: 14px;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.3s;
+  box-shadow: 0 10px 20px -5px rgba(102, 126, 234, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -5px rgba(102, 126, 234, 0.5);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.login-form p {
+  text-align: center;
+  margin-top: 24px;
+  color: #718096;
+  font-size: 15px;
+}
+
+.login-form a {
+  color: #764ba2;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.login-form a:hover {
+  color: #667eea;
+}
+
+.login-form a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s;
+}
+
+.login-form a:hover::after {
+  width: 100%;
+}
+
+/* Добавим красивую иконку замка сверху */
+.login-form::before {
+  content: '🔐';
+  display: block;
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 32px 24px;
+    border-radius: 24px;
+  }
+  
+  .login-form h2 {
+    font-size: 28px;
+  }
+  
+  .btn {
+    padding: 14px 20px;
+  }
+}
+
+/* Добавим анимацию появления */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-form {
+  animation: fadeInUp 0.6s ease-out;
+}

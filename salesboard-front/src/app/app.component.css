@@ -1,0 +1,210 @@
+:host {
+  display: block;
+  background: white;
+  min-height: 100vh;
+}
+
+/* Хедер */
+.header {
+  background: white;
+  border-bottom: 1px solid #e9ecef;
+  padding: 20px 40px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo i {
+  font-size: 32px;
+  color: #764ba2;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo h1 {
+  font-size: 24px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav a {
+  color: #4a5568;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav a:hover {
+  color: #764ba2;
+}
+
+.nav a.active {
+  color: #764ba2;
+}
+
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f7fafc;
+  border-radius: 100px;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.username i {
+  color: #764ba2;
+}
+
+/* Кнопки */
+.btn {
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  background: #f7fafc;
+  color: #4a5568;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: #edf2f7;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  color: white;
+  box-shadow: 0 15px 20px -3px rgba(102, 126, 234, 0.4);
+}
+
+/* Основной контент */
+.main {
+  padding: 40px;
+  min-height: calc(100vh - 200px);
+}
+
+/* Карточки для объявлений */
+.adverts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.advert-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 24px;
+  padding: 24px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.advert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+}
+
+.advert-price {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.advert-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.advert-category {
+  font-size: 14px;
+  color: #a0aec0;
+  margin-bottom: 16px;
+}
+
+.advert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Футер */
+.footer {
+  background: white;
+  border-top: 1px solid #e9ecef;
+  padding: 40px;
+  text-align: center;
+}
+
+.footer p {
+  color: #a0aec0;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.footer a {
+  color: #764ba2;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

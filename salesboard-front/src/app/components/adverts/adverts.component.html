@@ -1,0 +1,56 @@
+<!-- src/app/components/adverts/adverts.component.html -->
+<div class="adverts-container">
+  <!-- Заголовок и поиск -->
+  <div class="adverts-header">
+    <h2>Все объявления</h2>
+    
+    <div class="search-section">
+      <div class="search-input">
+        <input 
+          type="text" 
+          placeholder="Поиск объявлений..." 
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+        >
+        <button class="search-btn" (click)="onSearch()">Найти</button>
+      </div>
+      <button class="all-categories-btn">Все категории</button>
+    </div>
+  </div>
+
+  <!-- Состояния загрузки -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Загрузка объявлений...</p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredAdverts.length === 0" class="no-results">
+    <p>Не удалось загрузить объявления</p>
+  </div>
+
+  <!-- Сетка объявлений - компактный дизайн -->
+  <div class="adverts-grid" *ngIf="!isLoading && filteredAdverts.length > 0">
+    <div class="advert-card" *ngFor="let advert of filteredAdverts">
+      <!-- Верхняя часть с заголовком и ценой -->
+      <div class="advert-header">
+        <h3 class="advert-title">{{ advert.title }}</h3>
+        <span class="advert-price">{{ advert.price | currency:'RUB':'symbol':'1.0-0' }}</span>
+      </div>
+      
+      <!-- Описание -->
+      <p class="advert-description">{{ advert.description }}</p>
+      
+      <!-- Детали (город, категория) -->
+      <div class="advert-details">
+        <span class="advert-location">{{ advert.city }}</span>
+        <span class="advert-category">{{ getCategoryName(advert.categoryId) }}</span>
+      </div>
+      
+      <!-- Кнопки действий -->
+      <div class="advert-actions">
+        <button class="contact-btn">Связаться</button>
+        <button class="details-btn" [routerLink]="['/adverts', advert.id]">Подробнее</button>
+      </div>
+    </div>
+  </div>
+</div>
